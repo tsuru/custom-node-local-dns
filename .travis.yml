@@ -12,7 +12,7 @@ jobs:
     - stage: build and push
       script:
         - go get -u github.com/golang/dep/cmd/dep
-        - echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+        - docker login -u $DOCKER_USER -p $DOCKER_PASS
         - if [ -n "$TRAVIS_TAG" ]; then make TAG=$TRAVIS_TAG; else make; fi
       if: "(NOT type IN (pull_request)) AND (branch = master) OR (tag IS present)"
 notifications:
